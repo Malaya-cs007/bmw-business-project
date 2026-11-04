@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMW Plant Spartanburg - ERP & Catalog Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bmw: {
+                            navy: '#06132b',
+                            dark: '#0b1e3d',
+                            card: '#11284d',
+                            blue: '#1C69D2',
+                            lightBlue: '#4A90E2',
+                            silver: '#E0E6ED',
+                            accent: '#7097D1',
+                            red: '#E53E3E',
+                            green: '#38A169',
+                            amber: '#D69E2E'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Orbitron', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #06132b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1C69D2;
+            border-radius: 4px;
+        }
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(28, 105, 210, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(28, 105, 210, 0.3);
+        }
+        .glow-effect-lg {
+            box-shadow: 0 0 40px -5px rgba(28, 105, 210, 0.5);
+        }
+        .page-view {
+            display: none;
+        }
+        .page-view.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-bmw-navy text-slate-100 font-sans antialiased bg-grid-pattern min-h-screen flex flex-col selection:bg-bmw-blue selection:text-white">
+
+    <!-- TOP NAVIGATION HEADER (SHARED ACROSS ALL PAGES) -->
+    <header class="sticky top-0 z-50 bg-bmw-navy/90 backdrop-blur-md border-b border-bmw-blue/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- BMW Logo & Branding -->
+                <button onclick="navigatePage('page1')" class="flex items-center space-x-4 text-left focus:outline-none">
+                    <div class="w-12 h-12 rounded-full border-2 border-slate-300 flex items-center justify-center bg-gradient-to-tr from-slate-900 via-bmw-blue to-slate-100 shadow-md">
+                        <span class="font-tech text-xs font-black text-white tracking-tighter">BMW</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h1 class="font-tech text-lg sm:text-xl font-bold tracking-wider text-white">PLANT SPARTANBURG</h1>
+                            <span class="bg-bmw-blue/30 text-bmw-accent text-xs font-semibold px-2 py-0.5 rounded border border-bmw-blue/40">ERP 2.0</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Production Management System</p>
+                    </div>
+                </button>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <button onclick="navigatePage('page1')" id="nav-page1" class="nav-btn text-bmw-lightBlue border-b-2 border-bmw-blue font-semibold py-1 transition-colors">Home (ERP Overview)</button>
+                    <button onclick="navigatePage('page2')" id="nav-page2" class="nav-btn text-slate-300 hover:text-bmw-lightBlue py-1 transition-colors">Products &amp; Services</button>
+                    <button onclick="navigatePage('page3')" id="nav-page3" class="nav-btn text-slate-300 hover:text-bmw-lightBlue py-1 transition-colors">About Us &amp; Contact</button>
+                </nav>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Nav -->
+        <div id="mobileMenu" class="hidden md:hidden bg-bmw-dark border-b border-bmw-blue/30 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="navigatePage('page1')" class="block w-full text-left text-slate-300 hover:text-bmw-blue py-2 border-b border-slate-800">Home (ERP Overview)</button>
+            <button onclick="navigatePage('page2')" class="block w-full text-left text-slate-300 hover:text-bmw-blue py-2 border-b border-slate-800">Products &amp; Services</button>
+            <button onclick="navigatePage('page3')" class="block w-full text-left text-slate-300 hover:text-bmw-blue py-2">About Us &amp; Contact</button>
+        </div>
+    </header>
+
+    <!-- ================= PAGE 1 VIEW (INDEX.HTML) ================= -->
+    <div id="page1" class="page-view active">
+        <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+            <!-- SECTION 1: HERO & BUSINESS OVERVIEW -->
+            <section id="overview" class="relative rounded-2xl bg-gradient-to-br from-bmw-dark via-bmw-card to-bmw-navy p-6 sm:p-10 border border-bmw-blue/30 glow-effect overflow-hidden">
+                <div class="absolute -right-16 -top-16 w-64 h-64 bg-bmw-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center space-x-2 bg-bmw-blue/20 border border-bmw-blue/40 px-3 py-1 rounded-full text-bmw-accent text-xs font-semibold">
+                            <i class="fa-solid fa-industry"></i>
+                            <span>BMW Manufacturing Co., LLC • Spartanburg, SC</span>
+                        </div>
+
+                        <h2 class="text-3xl sm:text-5xl font-extrabold text-white font-tech leading-tight">
+                            Real-Time Downtime & <span class="text-transparent bg-clip-text bg-gradient-to-r from-bmw-lightBlue to-blue-400">Production Control</span>
+                        </h2>
+
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Plant Spartanburg manufactures iconic BMW X-Series vehicles including the <strong>X3, X5, X6, X7, and XM</strong> models. Operating with over 11,000 employees and delivering 1,500+ vehicles daily, the facility requires unified data tracking to eliminate assembly delays and keep assembly lines active.
+                        </p>
+
+                        <!-- Key Operational Stats -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
+                            <div class="bg-bmw-navy/80 border border-slate-700/50 p-4 rounded-xl">
+                                <p class="text-xs text-slate-400 font-medium">Daily Production</p>
+                                <p class="text-2xl font-bold font-tech text-bmw-lightBlue">1,500+</p>
+                                <p class="text-[10px] text-slate-500 mt-1">Vehicles / Day</p>
+                            </div>
+                            <div class="bg-bmw-navy/80 border border-slate-700/50 p-4 rounded-xl">
+                                <p class="text-xs text-slate-400 font-medium">Workforce</p>
+                                <p class="text-2xl font-bold font-tech text-white">11,000+</p>
+                                <p class="text-[10px] text-slate-500 mt-1">Plant Employees</p>
+                            </div>
+                            <div class="bg-bmw-navy/80 border border-slate-700/50 p-4 rounded-xl col-span-2 sm:col-span-1">
+                                <p class="text-xs text-slate-400 font-medium">Models Produced</p>
+                                <p class="text-xl font-bold font-tech text-bmw-accent">X3 – XM</p>
+                                <p class="text-[10px] text-slate-500 mt-1">SAV & SAC Lineups</p>
+                            </div>
+                        </div>
+
+                        <!-- Project Authors Header Badge -->
+                        <div class="pt-4 border-t border-slate-700/40 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+                            <span class="font-medium text-slate-300">Project Authors & ERP Database Designers:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-slate-800 text-slate-200 px-2.5 py-1 rounded-md border border-slate-700">Malaya Coley-Sturgis</span>
+                                <span class="bg-slate-800 text-slate-200 px-2.5 py-1 rounded-md border border-slate-700">Abby Oehlmann</span>
+                                <span class="bg-slate-800 text-slate-200 px-2.5 py-1 rounded-md border border-slate-700">Jacob Seigler</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Problem vs Solution Box -->
+                    <div class="lg:col-span-5 bg-bmw-navy/90 p-6 rounded-xl border border-bmw-blue/40 space-y-4">
+                        <h3 class="text-lg font-bold text-white font-tech flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
+                            Business Challenge & Solution
+                        </h3>
+                        
+                        <div class="space-y-3 text-xs sm:text-sm">
+                            <div class="bg-red-950/40 border border-red-800/50 p-3 rounded-lg">
+                                <p class="font-semibold text-red-400 mb-1">The Problem:</p>
+                                <p class="text-slate-300">Tracking production information and equipment malfunctions across disconnected departmental systems causes real-time visibility gaps and delays schedule adjustments during unexpected downtime.</p>
+                            </div>
+
+                            <div class="bg-emerald-950/40 border border-emerald-800/50 p-3 rounded-lg">
+                                <p class="font-semibold text-emerald-400 mb-1">The ERP Solution:</p>
+                                <p class="text-slate-300">A unified relational database platform linking Equipment, Issues, Downtime, and Production Orders with role-based input workflows and automated duration calculation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: USER ROLES & RBAC MATRIX -->
+            <section id="roles" class="space-y-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white flex items-center gap-3">
+                            <i class="fa-solid fa-users-gear text-bmw-blue"></i>
+                            User Roles & Access Control (RBAC)
+                        </h2>
+                        <p class="text-slate-400 text-sm mt-1">Standardized departmental inputs, operational visibility, and strict security isolation.</p>
+                    </div>
+                    <div class="bg-bmw-card border border-bmw-blue/30 p-1 rounded-lg flex space-x-1 text-xs">
+                        <button onclick="switchRoleTab('supervisor')" id="btn-supervisor" class="role-tab-btn active px-3 py-1.5 rounded-md font-medium transition-all bg-bmw-blue text-white">Supervisor</button>
+                        <button onclick="switchRoleTab('technician')" id="btn-technician" class="role-tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white transition-all">Maintenance Tech</button>
+                        <button onclick="switchRoleTab('manager')" id="btn-manager" class="role-tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white transition-all">Plant Manager</button>
+                    </div>
+                </div>
+
+                <!-- Role Detail Panels -->
+                <div class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 glow-effect">
+                    
+                    <!-- Production Line Supervisor -->
+                    <div id="role-panel-supervisor" class="role-panel grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <div class="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-slate-700/60 pb-6 lg:pb-0 lg:pr-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-lg bg-blue-600/20 text-bmw-blue border border-bmw-blue/40 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-user-shield"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Production Line Supervisor</h3>
+                                    <p class="text-xs text-bmw-accent">Line Operations & Monitoring</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Monitors assembly line output, detects unexpected line stops, and logs initial technical disruption requests directly into the ERP system.
+                            </p>
+                            <div class="bg-bmw-navy p-3 rounded-lg border border-slate-800 text-xs">
+                                <span class="font-semibold text-slate-200">Key Responsibility:</span>
+                                <p class="text-slate-400 mt-0.5">Report interruptions immediately and coordinate safe resumption upon repair completion.</p>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                            <div class="bg-bmw-navy/60 p-4 rounded-lg border border-slate-700/50">
+                                <h4 class="font-bold text-emerald-400 mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-pen-to-square"></i> Data Entered / Changed
+                                </h4>
+                                <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                    <li>Production Order Status (e.g. Delayed)</li>
+                                    <li>Downtime Start Time timestamp</li>
+                                    <li>Reported Equipment Issue description</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-bmw-navy/60 p-4 rounded-lg border border-slate-700/50">
+                                <h4 class="font-bold text-bmw-lightBlue mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-eye"></i> Information Viewed
+                                </h4>
+                                <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                    <li>Production schedules & order target dates</li>
+                                    <li>Equipment operational status</li>
+                                    <li>Active downtime logs on assigned line</li>
+                                </ul>
+                            </div>
+
+                            <div class="sm:col-span-2 bg-red-950/20 border border-red-900/40 p-3 rounded-lg flex items-start gap-3">
+                                <i class="fa-solid fa-lock text-red-400 text-base mt-0.5"></i>
+                                <div>
+                                    <span class="font-semibold text-red-300">Access Restriction Guardrail:</span>
+                                    <p class="text-slate-300 text-[11px] mt-0.5">Supervisors cannot modify maintenance repair technical details or overwrite executive master scheduling priorities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Maintenance Technician -->
+                    <div id="role-panel-technician" class="role-panel hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <div class="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-slate-700/60 pb-6 lg:pb-0 lg:pr-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Maintenance Technician</h3>
+                                    <p class="text-xs text-amber-400">Equipment Diagnostics & Repair</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Investigates machine faults, performs mechanical/sensor maintenance, updates issue status, and logs repair timestamps.
+                            </p>
+                            <div class="bg-bmw-navy p-3 rounded-lg border border-slate-800 text-xs">
+                                <span class="font-semibold text-slate-200">Key Responsibility:</span>
+                                <p class="text-slate-400 mt-0.5">Execute repairs, verify safety protocols, and mark equipment ready for restart review.</p>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                            <div class="bg-bmw-navy/60 p-4 rounded-lg border border-slate-700/50">
+                                <h4 class="font-bold text-emerald-400 mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-pen-to-square"></i> Data Entered / Changed
+                                </h4>
+                                <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                    <li>Repair Status (In Progress / Resolved)</li>
+                                    <li>Technical Resolution Details</li>
+                                    <li>Downtime End Time timestamp</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-bmw-navy/60 p-4 rounded-lg border border-slate-700/50">
+                                <h4 class="font-bold text-bmw-lightBlue mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-eye"></i> Information Viewed
+                                </h4>
+                                <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                    <li>Technical issues & reported error codes</li>
+                                    <li>Affected production order IDs</li>
+                                    <li>Equipment specifications & locations</li>
+                                </ul>
+                            </div>
+
+                            <div class="sm:col-span-2 bg-red-950/20 border border-red-900/40 p-3 rounded-lg flex items-start gap-3">
+                                <i class="fa-solid fa-lock text-red-400 text-base mt-0.5"></i>
+                                <div>
+                                    <span class="font-semibold text-red-300">Access Restriction Guardrail:</span>
+                                    <p class="text-slate-300 text-[11px] mt-0.5">Technicians have full rights to equipment repair records but strict zero-permission to alter master vehicle order schedules or executive management notes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Plant Manager -->
+                    <div id="role-panel-manager" class="role-panel hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <div class="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-slate-700/60 pb-6 lg:pb-0 lg:pr-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-lg bg-purple-600/20 text-purple-400 border border-purple-500/40 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Plant Manager</h3>
+                                    <p class="text-xs text-purple-300">Executive Performance & Scheduling</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Reviews holistic plant throughput, monitors downtime metrics, and adjusts vehicle model schedule priorities to maintain plant targets.
+                            </p>
+                            <div class="bg-bmw-navy p-3 rounded-lg border border-slate-800 text-xs">
+                                <span class="font-semibold text-slate-200">Key Responsibility:</span>
+                                <p class="text-slate-400 mt-0.5">Adjust high-level production schedules and reallocate capacity to mitigate systemic bottleneck delays.</p>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                            <div class="bg-bmw-navy/60 p-4 rounded-lg border border-slate-700/50">
+                                <h4 class="font-bold text-emerald-400 mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-pen-to-square"></i> Data Entered / Changed
+                                </h4>
+                                <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                    <li>Master Production Order Priorities</li>
+                                    <li>Scheduled Order Dates</li>
+                                    <li>Management Notes & Directive Flags</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-bmw-navy/60 p-4 rounded-lg border border-slate-700/50">
+                                <h4 class="font-bold text-bmw-lightBlue mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-eye"></i> Information Viewed
+                                </h4>
+                                <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                    <li>Plant-wide downtime summaries</li>
+                                    <li>Performance analytics & bottleneck trends</li>
+                                    <li>Cross-departmental audit logs</li>
+                                </ul>
+                            </div>
+
+                            <div class="sm:col-span-2 bg-red-950/20 border border-red-900/40 p-3 rounded-lg flex items-start gap-3">
+                                <i class="fa-solid fa-lock text-red-400 text-base mt-0.5"></i>
+                                <div>
+                                    <span class="font-semibold text-red-300">Access Restriction Guardrail:</span>
+                                    <p class="text-slate-300 text-[11px] mt-0.5">Plant managers adjust strategic dates and priorities, but database foreign keys prevent raw record deletions without verified DBA compliance.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 3: DATABASE ARCHITECTURE & SAMPLE DATA TABLES -->
+            <section id="database" class="space-y-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white flex items-center gap-3">
+                            <i class="fa-solid fa-database text-bmw-blue"></i>
+                            Relational Database Architecture
+                        </h2>
+                        <p class="text-slate-400 text-sm mt-1">Normalized relational structure enforcing data integrity with Primary Keys (PK) & Foreign Keys (FK).</p>
+                    </div>
+
+                    <!-- Database Table Selector Tabs -->
+                    <div class="flex flex-wrap gap-1 bg-bmw-card p-1 rounded-lg border border-bmw-blue/30 text-xs">
+                        <button onclick="switchDbTab('order')" id="dbtab-order" class="db-tab-btn active px-3 py-1.5 rounded-md font-medium transition-all bg-bmw-blue text-white">ProductionOrder</button>
+                        <button onclick="switchDbTab('equipment')" id="dbtab-equipment" class="db-tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white transition-all">Equipment</button>
+                        <button onclick="switchDbTab('issue')" id="dbtab-issue" class="db-tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white transition-all">TechnicalIssue</button>
+                        <button onclick="switchDbTab('downtime')" id="dbtab-downtime" class="db-tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white transition-all">DowntimeRecord</button>
+                    </div>
+                </div>
+
+                <!-- Database Content Box -->
+                <div class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 glow-effect space-y-6">
+                    
+                    <!-- SCHEMA DICTIONARY TABLE -->
+                    <div>
+                        <h3 id="table-schema-title" class="text-base font-bold text-white font-tech mb-3 flex items-center justify-between">
+                            <span><i class="fa-solid fa-table text-bmw-accent mr-2"></i> Schema Specification: <span class="text-bmw-lightBlue">ProductionOrder</span></span>
+                            <span class="text-xs font-normal text-slate-400 font-sans">4 Fields Defined</span>
+                        </h3>
+
+                        <div class="overflow-x-auto rounded-lg border border-slate-700/60">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-bmw-navy text-slate-300 font-tech uppercase text-[11px] tracking-wider border-b border-slate-700">
+                                    <tr>
+                                        <th class="px-4 py-3">Field Name</th>
+                                        <th class="px-4 py-3">Data Type</th>
+                                        <th class="px-4 py-3">Key Type</th>
+                                        <th class="px-4 py-3">Description & Integrity Rules</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="schema-tbody" class="divide-y divide-slate-800 text-slate-300">
+                                    <!-- Dynamic Schema Populated via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- LIVE SAMPLE RECORDS TABLE -->
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 id="table-data-title" class="text-base font-bold text-white font-tech">
+                                <i class="fa-solid fa-server text-emerald-400 mr-2"></i> Sample Database Records
+                            </h3>
+                            <span class="text-xs text-slate-400">Live Simulation Sync Active</span>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-lg border border-slate-700/60">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-bmw-navy text-slate-300 font-tech uppercase text-[11px] tracking-wider border-b border-slate-700">
+                                    <tr id="data-thead-tr">
+                                        <!-- Dynamic Table Header -->
+                                    </tr>
+                                </thead>
+                                <tbody id="data-tbody" class="divide-y divide-slate-800 text-slate-300 font-mono">
+                                    <!-- Dynamic Data Rows Populated via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- CRUD ACTIONS SHOWCASE -->
+                    <div class="pt-4 border-t border-slate-700/60">
+                        <h4 class="text-xs font-bold text-slate-300 uppercase font-tech tracking-wider mb-3">Demonstrate Database Operations (CRUD Actions)</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button onclick="triggerCRUD('CREATE')" class="bg-emerald-950/40 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-700/50 p-3 rounded-lg text-left transition-all group">
+                                <div class="font-bold font-tech text-xs group-hover:text-emerald-200">1. CREATE (INSERT)</div>
+                                <p class="text-[11px] text-slate-400 mt-1">Supervisor reports line disruption</p>
+                            </button>
+                            <button onclick="triggerCRUD('READ')" class="bg-blue-950/40 hover:bg-blue-900/50 text-bmw-lightBlue border border-bmw-blue/50 p-3 rounded-lg text-left transition-all group">
+                                <div class="font-bold font-tech text-xs group-hover:text-white">2. READ (SELECT)</div>
+                                <p class="text-[11px] text-slate-400 mt-1">Plant Manager queries delays</p>
+                            </button>
+                            <button onclick="triggerCRUD('UPDATE')" class="bg-amber-950/40 hover:bg-amber-900/50 text-amber-300 border border-amber-700/50 p-3 rounded-lg text-left transition-all group">
+                                <div class="font-bold font-tech text-xs group-hover:text-amber-200">3. UPDATE (UPDATE)</div>
+                                <p class="text-[11px] text-slate-400 mt-1">Tech marks repair resolved</p>
+                            </button>
+                            <button onclick="triggerCRUD('DELETE')" class="bg-red-950/40 hover:bg-red-900/50 text-red-300 border border-red-700/50 p-3 rounded-lg text-left transition-all group">
+                                <div class="font-bold font-tech text-xs group-hover:text-red-200">4. DELETE (DELETE)</div>
+                                <p class="text-[11px] text-slate-400 mt-1">DBA cleans verified duplicates</p>
+                            </button>
+                        </div>
+
+                        <!-- CRUD Notification Alert Box -->
+                        <div id="crud-alert" class="hidden mt-4 p-3 rounded-lg border text-xs flex items-start justify-between">
+                            <div class="flex items-center space-x-2">
+                                <i id="crud-alert-icon" class="fa-solid fa-circle-info"></i>
+                                <span id="crud-alert-msg" class="font-mono"></span>
+                            </div>
+                            <button onclick="document.getElementById('crud-alert').classList.add('hidden')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 4: SYSTEM ARCHITECTURE & ERD VISUALIZER -->
+            <section id="architecture" class="space-y-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white flex items-center gap-3">
+                        <i class="fa-solid fa-sitemap text-bmw-blue"></i>
+                        System Architecture & Entity Relationship (ERD)
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Decoupled ERP application middleware enforcing secure data access to relational tables.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Interactive Diagram Canvas -->
+                    <div class="lg:col-span-8 bg-bmw-card p-6 rounded-xl border border-slate-700/60 glow-effect space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-700/60 pb-3">
+                            <h3 class="font-tech font-bold text-sm text-white">Data Flow Architecture Diagram</h3>
+                            <span class="text-xs bg-bmw-navy text-bmw-accent px-2 py-1 rounded border border-bmw-blue/30">Role-Controlled Middleware</span>
+                        </div>
+
+                        <!-- SVG Architecture Flow Diagram -->
+                        <div class="w-full overflow-x-auto py-2">
+                            <svg viewBox="0 0 750 420" class="w-full h-auto min-w-[600px]" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="750" height="420" rx="12" fill="#06132b"/>
+                                
+                                <g transform="translate(30, 30)">
+                                    <rect width="190" height="60" rx="8" fill="#11284d" stroke="#1C69D2" stroke-width="1.5"/>
+                                    <text x="95" y="35" text-anchor="middle" fill="#FFFFFF" font-family="Inter" font-size="11" font-weight="bold">Production Line Supervisor</text>
+                                    <text x="95" y="48" text-anchor="middle" fill="#7097D1" font-family="Inter" font-size="9">Report Disruptions & Status</text>
+                                </g>
+
+                                <g transform="translate(280, 30)">
+                                    <rect width="190" height="60" rx="8" fill="#11284d" stroke="#D69E2E" stroke-width="1.5"/>
+                                    <text x="95" y="35" text-anchor="middle" fill="#FFFFFF" font-family="Inter" font-size="11" font-weight="bold">Maintenance Technician</text>
+                                    <text x="95" y="48" text-anchor="middle" fill="#D69E2E" font-family="Inter" font-size="9">Update Repair & End Times</text>
+                                </g>
+
+                                <g transform="translate(530, 30)">
+                                    <rect width="190" height="60" rx="8" fill="#11284d" stroke="#9F7AEA" stroke-width="1.5"/>
+                                    <text x="95" y="35" text-anchor="middle" fill="#FFFFFF" font-family="Inter" font-size="11" font-weight="bold">Plant Manager</text>
+                                    <text x="95" y="48" text-anchor="middle" fill="#B794F4" font-family="Inter" font-size="9">Review Reports & Re-schedule</text>
+                                </g>
+
+                                <path d="M 125 90 L 125 150 Q 125 160 135 160 L 350 160" stroke="#7097D1" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+                                <path d="M 375 90 L 375 160" stroke="#D69E2E" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+                                <path d="M 625 90 L 625 150 Q 625 160 615 160 L 400 160" stroke="#B794F4" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+                                <g transform="translate(140, 160)">
+                                    <rect width="470" height="80" rx="10" fill="#0b1e3d" stroke="#38A169" stroke-width="2"/>
+                                    <text x="235" y="35" text-anchor="middle" fill="#FFFFFF" font-family="Orbitron" font-size="13" font-weight="bold">ERP Application Platform Layer</text>
+                                    <text x="235" y="55" text-anchor="middle" fill="#A0AEC0" font-family="Inter" font-size="10">Issue Tracking • Schedule Updates • Access Control • Automated Metrics</text>
+                                </g>
+
+                                <path d="M 320 240 L 320 310" stroke="#4A90E2" stroke-width="2" fill="none"/>
+                                <polygon points="320,315 315,305 325,305" fill="#4A90E2"/>
+                                <text x="270" y="280" font-family="Inter" font-size="10" fill="#4A90E2" font-weight="bold">Write/Update</text>
+
+                                <path d="M 430 310 L 430 240" stroke="#38A169" stroke-width="2" fill="none"/>
+                                <polygon points="430,235 425,245 435,245" fill="#38A169"/>
+                                <text x="440" y="280" font-family="Inter" font-size="10" fill="#38A169" font-weight="bold">Retrieve/Select</text>
+
+                                <g transform="translate(100, 315)">
+                                    <rect width="550" height="75" rx="10" fill="#1A202C" stroke="#4A90E2" stroke-width="2"/>
+                                    <text x="275" y="32" text-anchor="middle" fill="#F6AD55" font-family="Orbitron" font-size="12" font-weight="bold">Shared Relational Database Layer</text>
+                                    <text x="275" y="54" text-anchor="middle" fill="#E2E8F0" font-family="Inter" font-size="10" font-weight="medium">
+                                        [ ProductionOrder ] <tspan fill="#7097D1">↔</tspan> [ Equipment ] <tspan fill="#7097D1">↔</tspan> [ TechnicalIssue ] <tspan fill="#7097D1">↔</tspan> [ DowntimeRecord ]
+                                    </text>
+                                </g>
+
+                                <defs>
+                                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#7097D1"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- AI System Design Review & Revisions -->
+                    <div class="lg:col-span-4 bg-bmw-card p-6 rounded-xl border border-slate-700/60 glow-effect space-y-4">
+                        <h3 class="font-tech font-bold text-base text-white flex items-center gap-2">
+                            <i class="fa-solid fa-code-compare text-bmw-lightBlue"></i>
+                            Architecture Design Revisions
+                        </h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Evaluated during Part 4 design reviews to ensure isolation between database tables and end-user roles:
+                        </p>
+
+                        <div class="space-y-3 text-xs">
+                            <div class="bg-bmw-navy p-3 rounded-lg border border-slate-800">
+                                <span class="font-bold text-bmw-lightBlue block mb-1">1. User-to-Application Isolation</span>
+                                <p class="text-slate-400">Restructured connections so users interface strictly with the ERP software application layer rather than directly querying database tables, enforcing RBAC policy.</p>
+                            </div>
+
+                            <div class="bg-bmw-navy p-3 rounded-lg border border-slate-800">
+                                <span class="font-bold text-emerald-400 block mb-1">2. Bidirectional Data Flow</span>
+                                <p class="text-slate-400">Explicitly separated <em>Save/Update</em> transactions from <em>Query/Retrieve</em> operations to highlight transactional integrity during live vehicle assembly.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 5: LIVE TRANSACTION WALKTHROUGH SIMULATOR -->
+            <section id="walkthrough" class="space-y-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white flex items-center gap-3">
+                            <i class="fa-solid fa-route text-bmw-blue"></i>
+                            Transaction Walkthrough Simulator
+                        </h2>
+                        <p class="text-slate-400 text-sm mt-1">Simulate an assembly robot fault on a BMW X5 production order in real time.</p>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button onclick="resetWalkthrough()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-2 rounded-lg border border-slate-700 transition-all">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> Reset Simulation
+                        </button>
+                        <button onclick="nextStep()" id="next-step-btn" class="bg-bmw-blue hover:bg-blue-600 text-white font-semibold text-xs px-4 py-2 rounded-lg shadow transition-all">
+                            Advance Step <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stepper Container -->
+                <div class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 glow-effect space-y-6">
+                    
+                    <!-- Step Buttons Progress Bar -->
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs">
+                        <div id="step-pill-1" class="step-pill bg-bmw-blue text-white p-2.5 rounded-lg font-bold border border-bmw-blue transition-all">
+                            1. Fault Detection
+                        </div>
+                        <div id="step-pill-2" class="step-pill bg-bmw-navy text-slate-400 p-2.5 rounded-lg font-bold border border-slate-800 transition-all">
+                            2. DB Record Insert
+                        </div>
+                        <div id="step-pill-3" class="step-pill bg-bmw-navy text-slate-400 p-2.5 rounded-lg font-bold border border-slate-800 transition-all">
+                            3. Tech Repair
+                        </div>
+                        <div id="step-pill-4" class="step-pill bg-bmw-navy text-slate-400 p-2.5 rounded-lg font-bold border border-slate-800 transition-all">
+                            4. Resumption
+                        </div>
+                        <div id="step-pill-5" class="step-pill bg-bmw-navy text-slate-400 p-2.5 rounded-lg font-bold border border-slate-800 transition-all col-span-2 sm:col-span-1">
+                            5. Executive Review
+                        </div>
+                    </div>
+
+                    <!-- Active Step Description Box -->
+                    <div class="bg-bmw-navy p-6 rounded-xl border border-bmw-blue/30 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                        <div class="lg:col-span-7 space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <span id="step-number-badge" class="w-8 h-8 rounded-full bg-bmw-blue text-white font-bold flex items-center justify-center font-tech text-sm">1</span>
+                                <h3 id="step-title" class="text-lg font-bold text-white font-tech">Assembly Robot Halts on BMW X5 Order #101</h3>
+                            </div>
+
+                            <p id="step-description" class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                During production of a BMW X5 (Order #101), Assembly Robot #201 on Assembly Line A experiences a mechanical arm fault. The Production Line Supervisor notices the line stoppage and initiates a malfunction report in the ERP software.
+                            </p>
+
+                            <div class="flex items-center space-x-4 text-xs pt-2">
+                                <span class="text-slate-400">Actor: <strong id="step-actor" class="text-bmw-lightBlue">Production Line Supervisor</strong></span>
+                                <span class="text-slate-400">ERP Action: <strong id="step-action-type" class="text-amber-400">CREATE & UPDATE</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Live Database State Inspector -->
+                        <div class="lg:col-span-5 bg-slate-950 p-4 rounded-lg border border-slate-800 text-xs font-mono space-y-2">
+                            <div class="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-2">
+                                <span class="font-bold text-bmw-accent">System State Inspector</span>
+                                <span class="text-[10px] text-emerald-400"><i class="fa-solid fa-circle text-[8px] animate-pulse"></i> LIVE</span>
+                            </div>
+                            <div id="step-inspector" class="space-y-1 text-slate-300 text-[11px] overflow-x-auto">
+                                <!-- Populated dynamically via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 6: SYSTEM EVALUATION, GOVERNANCE & SECURITY -->
+            <section id="evaluation" class="space-y-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white flex items-center gap-3">
+                        <i class="fa-solid fa-shield-halved text-bmw-blue"></i>
+                        System Evaluation & Security Governance
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Analysis of data integrity guardrails, offline fallback procedures, and security controls.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Q1: Problem Resolution -->
+                    <div class="bg-bmw-card p-6 rounded-xl border border-slate-700/60 glow-effect space-y-3">
+                        <div class="flex items-center space-x-3 text-bmw-lightBlue font-tech font-bold text-sm">
+                            <div class="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center border border-bmw-blue/40">1</div>
+                            <h3>How the ERP Solves Core Business Problems</h3>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            By linking technical issues directly to equipment IDs, downtime records, and vehicle production orders in a single database, plant personnel gain real-time visibility into active disruptions. Plant managers can re-sequence order queues based on live equipment recovery times rather than relying on delayed paper reports.
+                        </p>
+                    </div>
+
+                    <!-- Q2: Data Integrity & Error Prevention -->
+                    <div class="bg-bmw-card p-6 rounded-xl border border-slate-700/60 glow-effect space-y-3">
+                        <div class="flex items-center space-x-3 text-emerald-400 font-tech font-bold text-sm">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-600/20 flex items-center justify-center border border-emerald-500/40">2</div>
+                            <h3>Error Prevention & Constraints</h3>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Primary Keys ensure unique record identification, while Foreign Keys guarantee that downtime entries reference existing issues and orders. Input forms enforce timestamp logic (e.g., End Time must be greater than Start Time) and restrict status updates to valid pre-defined values.
+                        </p>
+                    </div>
+
+                    <!-- Q3: Offline Fallback Protocol -->
+                    <div class="bg-bmw-card p-6 rounded-xl border border-slate-700/60 glow-effect space-y-3">
+                        <div class="flex items-center space-x-3 text-amber-400 font-tech font-bold text-sm">
+                            <div class="w-8 h-8 rounded-lg bg-amber-600/20 flex items-center justify-center border border-amber-500/40">3</div>
+                            <h3>System Offline & Network Fallback Protocol</h3>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            If network connectivity is lost, plant personnel activate approved paper-based downtime tracking forms. Once system access is restored, designated ERP administrators back-enter timestamps, reconcile duplicate entries, and execute data validation checks. Daily automated database backups prevent data loss.
+                        </p>
+                    </div>
+
+                    <!-- Q4: Security & Information Protection -->
+                    <div class="bg-bmw-card p-6 rounded-xl border border-slate-700/60 glow-effect space-y-3">
+                        <div class="flex items-center space-x-3 text-purple-400 font-tech font-bold text-sm">
+                            <div class="w-8 h-8 rounded-lg bg-purple-600/20 flex items-center justify-center border border-purple-500/40">4</div>
+                            <h3>Security, Encryption & KPI Metrics</h3>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Individual user login credentials enforce Role-Based Access Control (RBAC). Data is encrypted in transit and at rest. System performance is evaluated using key performance metrics: Mean Time to Detect (MTTD), Mean Time to Repair (MTTR), Schedule Adherence, and Record Accuracy.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ================= PAGE 2 VIEW (PAGE2.HTML) ================= -->
+    <div id="page2" class="page-view">
+        <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+            <!-- HERO SECTION -->
+            <section class="relative rounded-2xl bg-gradient-to-br from-bmw-dark via-bmw-card to-bmw-navy p-6 sm:p-10 border border-bmw-blue/30 glow-effect overflow-hidden">
+                <div class="absolute -right-16 -top-16 w-64 h-64 bg-bmw-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="max-w-3xl space-y-4">
+                    <div class="inline-flex items-center space-x-2 bg-bmw-blue/20 border border-bmw-blue/40 px-3 py-1 rounded-full text-bmw-accent text-xs font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-car-side"></i>
+                        <span>Our Offer • Student Business Concept</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white font-tech leading-tight">
+                        Built for the road.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-bmw-lightBlue to-blue-400">Inspired by Spartanburg.</span>
+                    </h1>
+
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Explore three classroom vehicle packages inspired by BMW Plant Spartanburg. Choose your style, imagine your build, and find your next adventure.
+                    </p>
+                </div>
+            </section>
+
+            <!-- VEHICLE CATALOG SECTION -->
+            <section class="space-y-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white flex items-center gap-3">
+                        <i class="fa-solid fa-layer-group text-bmw-blue"></i>
+                        Find Your Kind of Drive
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">From everyday escapes to bigger adventures, our fictional packages pair BMW X models with a distinct personality.</p>
+                </div>
+
+                <!-- Disclaimer Notice Box -->
+                <div class="bg-bmw-card/60 border border-bmw-blue/40 p-4 rounded-xl text-xs text-slate-300 flex items-start space-x-3">
+                    <i class="fa-solid fa-circle-info text-bmw-lightBlue text-base mt-0.5"></i>
+                    <p>
+                        <strong class="text-white font-semibold">Classroom Catalog Notice:</strong> All package names, prices, included features, and offers below are invented for this assignment. Illustrations are stylized concepts, not exact vehicle renderings. This is not an official BMW sales website.
+                    </p>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Package 1 -->
+                    <div class="bg-bmw-card rounded-xl border border-slate-700/60 overflow-hidden flex flex-col glow-effect">
+                        <div class="bg-slate-900/50 p-2 border-b border-slate-700/50">
+                            <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22400%22%20viewBox%3D%220%200%20640%20400%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bg%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23e7edf3%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23f9fafc%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22paint%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%231e66af%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23152b42%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22640%22%20height%3D%22400%22%20fill%3D%22url%28%23bg%29%22%2F%3E%3Ctext%20x%3D%2235%22%20y%3D%2265%22%20fill%3D%22%23d1dbe6%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2266%22%20font-weight%3D%22bold%22%3EX5%3C%2Ftext%3E%3Cpath%20d%3D%22M0%20275%20L640%20275%22%20stroke%3D%22%23d4dce6%22%2F%3E%3Cellipse%20cx%3D%22320%22%20cy%3D%22289%22%20rx%3D%22247%22%20ry%3D%2217%22%20fill%3D%22%23b9c4d0%22%20opacity%3D%22.4%22%2F%3E%3Cpath%20d%3D%22M170%20207%20L219%20145%20Q229%20135%20250%20135%20L365%20135%20Q387%20135%20403%20155%20L451%20205%20L508%20220%20Q530%20225%20534%20244%20L536%20267%20Q535%20277%20519%20277%20L119%20277%20Q104%20274%20104%20260%20L107%20231%20Q109%20215%20130%20211%20Z%22%20fill%3D%22url%28%23paint%29%22%20stroke%3D%22%2324415a%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M187%20200%20L230%20150%20L350%20150%20Q374%20148%20389%20167%20L420%20200%20Z%22%20fill%3D%22%23bcd1e2%22%2F%3E%3Cpath%20d%3D%22M287%20150%20L287%20200%20M352%20150%20L369%20200%22%20stroke%3D%22%23253b51%22%20stroke-width%3D%227%22%2F%3E%3Cpath%20d%3D%22M123%20235%20L500%20235%22%20stroke%3D%22%23d6e8f8%22%20opacity%3D%22.5%22%2F%3E%3Cpath%20d%3D%22M111%20235%20L143%20235%20L151%20246%20L109%20246%20M493%20232%20L520%20238%20L525%20249%20L493%20246%22%20fill%3D%22%23edf8ff%22%2F%3E%3Cpath%20d%3D%22M282%20208%20L282%20254%20M374%20208%20L380%20254%22%20stroke%3D%22%23112e4c%22%20opacity%3D%22.5%22%2F%3E%3Cpath%20d%3D%22M295%20215%20L311%20215%20M386%20215%20L402%20215%22%20stroke%3D%22%23c9d9e6%22%20stroke-width%3D%223%22%2F%3E%3Cg%20fill%3D%22%2318232d%22%20stroke%3D%22%23edf1f5%22%20stroke-width%3D%225%22%3E%3Ccircle%20cx%3D%22196%22%20cy%3D%22269%22%20r%3D%2239%22%2F%3E%3Ccircle%20cx%3D%22444%22%20cy%3D%22269%22%20r%3D%2239%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23aab8c7%22%20stroke%3D%22%233c4c60%22%20stroke-width%3D%226%22%3E%3Ccircle%20cx%3D%22196%22%20cy%3D%22269%22%20r%3D%2223%22%2F%3E%3Ccircle%20cx%3D%22444%22%20cy%3D%22269%22%20r%3D%2223%22%2F%3E%3C%2Fg%3E%3Ctext%20x%3D%22320%22%20y%3D%22354%22%20text-anchor%3D%22middle%22%20fill%3D%22%23536477%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%3ESTUDENT%20CONCEPT%20ILLUSTRATION%3C%2Ftext%3E%3C%2Fsvg%3E" alt="X5 Everyday Escape" class="w-full h-auto rounded-lg">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <span class="text-bmw-accent font-tech text-xs tracking-wider uppercase font-semibold">Everyday Versatility</span>
+                            <h3 class="text-xl font-bold font-tech text-white">BMW X5 Everyday Escape</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">For the driver who goes from a morning meeting to a mountain weekend. A balanced package with room for the plans you make along the way.</p>
+                            
+                            <ul class="text-xs text-slate-300 space-y-2 py-2 border-t border-slate-700/50">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Blue exterior concept</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Comfort interior package</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Weekend cargo accessory bundle</li>
+                            </ul>
+
+                            <div class="mt-auto pt-4 border-t border-slate-700/60">
+                                <span class="text-2xl font-tech font-bold text-white">$68,500</span>
+                                <span class="block text-[11px] text-slate-400">Fictional classroom package price</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package 2 -->
+                    <div class="bg-bmw-card rounded-xl border border-slate-700/60 overflow-hidden flex flex-col glow-effect">
+                        <div class="bg-slate-900/50 p-2 border-b border-slate-700/50">
+                            <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22400%22%20viewBox%3D%220%200%20640%20400%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bg%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23e7edf3%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23f9fafc%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22paint%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23b52e3f%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23152b42%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22640%22%20height%3D%22400%22%20fill%3D%22url%28%23bg%29%22%2F%3E%3Ctext%20x%3D%2235%22%20y%3D%2265%22%20fill%3D%22%23d1dbe6%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2266%22%20font-weight%3D%22bold%22%3EX6%3C%2Ftext%3E%3Cpath%20d%3D%22M0%20275%20L640%20275%22%20stroke%3D%22%23d4dce6%22%2F%3E%3Cellipse%20cx%3D%22320%22%20cy%3D%22289%22%20rx%3D%22247%22%20ry%3D%2217%22%20fill%3D%22%23b9c4d0%22%20opacity%3D%22.4%22%2F%3E%3Cpath%20d%3D%22M160%20207%20L220%20141%20Q235%20130%20259%20131%20L320%20136%20Q344%20140%20374%20160%20L451%20205%20L508%20220%20Q530%20225%20534%20244%20L536%20267%20Q535%20277%20519%20277%20L119%20277%20Q104%20274%20104%20260%20L107%20231%20Q109%20215%20130%20211%20Z%22%20fill%3D%22url%28%23paint%29%22%20stroke%3D%22%2324415a%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M187%20200%20L230%20150%20L350%20150%20Q374%20148%20389%20167%20L420%20200%20Z%22%20fill%3D%22%23bcd1e2%22%2F%3E%3Cpath%20d%3D%22M287%20150%20L287%20200%20M352%20150%20L369%20200%22%20stroke%3D%22%23253b51%22%20stroke-width%3D%227%22%2F%3E%3Cpath%20d%3D%22M123%20235%20L500%20235%22%20stroke%3D%22%23d6e8f8%22%20opacity%3D%22.5%22%2F%3E%3Cpath%20d%3D%22M111%20235%20L143%20235%20L151%20246%20L109%20246%20M493%20232%20L520%20238%20L525%20249%20L493%20246%22%20fill%3D%22%23edf8ff%22%2F%3E%3Cpath%20d%3D%22M282%20208%20L282%20254%20M374%20208%20L380%20254%22%20stroke%3D%22%23112e4c%22%20opacity%3D%22.5%22%2F%3E%3Cpath%20d%3D%22M295%20215%20L311%20215%20M386%20215%20L402%20215%22%20stroke%3D%22%23c9d9e6%22%20stroke-width%3D%223%22%2F%3E%3Cg%20fill%3D%22%2318232d%22%20stroke%3D%22%23edf1f5%22%20stroke-width%3D%225%22%3E%3Ccircle%20cx%3D%22196%22%20cy%3D%22269%22%20r%3D%2239%22%2F%3E%3Ccircle%20cx%3D%22444%22%20cy%3D%22269%22%20r%3D%2239%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23aab8c7%22%20stroke%3D%22%233c4c60%22%20stroke-width%3D%226%22%3E%3Ccircle%20cx%3D%22196%22%20cy%3D%22269%22%20r%3D%2223%22%2F%3E%3Ccircle%20cx%3D%22444%22%20cy%3D%22269%22%20r%3D%2223%22%2F%3E%3C%2Fg%3E%3Ctext%20x%3D%22320%22%20y%3D%22354%22%20text-anchor%3D%22middle%22%20fill%3D%22%23536477%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%3ESTUDENT%20CONCEPT%20ILLUSTRATION%3C%2Ftext%3E%3C%2Fsvg%3E" alt="X6 Nightfall Sport" class="w-full h-auto rounded-lg">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <span class="text-bmw-accent font-tech text-xs tracking-wider uppercase font-semibold">A Bolder Arrival</span>
+                            <h3 class="text-xl font-bold font-tech text-white">BMW X6 Nightfall Sport</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">For the driver who likes every entrance to feel like an occasion. A sport-inspired concept with a bold color palette and expressive silhouette.</p>
+                            
+                            <ul class="text-xs text-slate-300 space-y-2 py-2 border-t border-slate-700/50">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Red exterior concept</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Black accent styling package</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Sport-inspired interior theme</li>
+                            </ul>
+
+                            <div class="mt-auto pt-4 border-t border-slate-700/60">
+                                <span class="text-2xl font-tech font-bold text-white">$76,000</span>
+                                <span class="block text-[11px] text-slate-400">Fictional classroom package price</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package 3 -->
+                    <div class="bg-bmw-card rounded-xl border border-slate-700/60 overflow-hidden flex flex-col glow-effect">
+                        <div class="bg-slate-900/50 p-2 border-b border-slate-700/50">
+                            <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22400%22%20viewBox%3D%220%200%20640%20400%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bg%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23e7edf3%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23f9fafc%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22paint%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%239aa7b7%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23152b42%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22640%22%20height%3D%22400%22%20fill%3D%22url%28%23bg%29%22%2F%3E%3Ctext%20x%3D%2235%22%20y%3D%2265%22%20fill%3D%22%23d1dbe6%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2266%22%20font-weight%3D%22bold%22%3EX7%3C%2Ftext%3E%3Cpath%20d%3D%22M0%20275%20L640%20275%22%20stroke%3D%22%23d4dce6%22%2F%3E%3Cellipse%20cx%3D%22320%22%20cy%3D%22289%22%20rx%3D%22247%22%20ry%3D%2217%22%20fill%3D%22%23b9c4d0%22%20opacity%3D%22.4%22%2F%3E%3Cpath%20d%3D%22M145%20207%20L187%20137%20Q194%20124%20213%20124%20L391%20124%20Q406%20125%20415%20145%20L451%20205%20L508%20220%20Q530%20225%20534%20244%20L536%20267%20Q535%20277%20519%20277%20L119%20277%20Q104%20274%20104%20260%20L107%20231%20Q109%20215%20130%20211%20Z%22%20fill%3D%22url%28%23paint%29%22%20stroke%3D%22%2324415a%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M187%20200%20L230%20150%20L350%20150%20Q374%20148%20389%20167%20L420%20200%20Z%22%20fill%3D%22%23bcd1e2%22%2F%3E%3Cpath%20d%3D%22M287%20150%20L287%20200%20M352%20150%20L369%20200%22%20stroke%3D%22%23253b51%22%20stroke-width%3D%227%22%2F%3E%3Cpath%20d%3D%22M123%20235%20L500%20235%22%20stroke%3D%22%23d6e8f8%22%20opacity%3D%22.5%22%2F%3E%3Cpath%20d%3D%22M111%20235%20L143%20235%20L151%20246%20L109%20246%20M493%20232%20L520%20238%20L525%20249%20L493%20246%22%20fill%3D%22%23edf8ff%22%2F%3E%3Cpath%20d%3D%22M282%20208%20L282%20254%20M374%20208%20L380%20254%22%20stroke%3D%22%23112e4c%22%20opacity%3D%22.5%22%2F%3E%3Cpath%20d%3D%22M295%20215%20L311%20215%20M386%20215%20L402%20215%22%20stroke%3D%22%23c9d9e6%22%20stroke-width%3D%223%22%2F%3E%3Cg%20fill%3D%22%2318232d%22%20stroke%3D%22%23edf1f5%22%20stroke-width%3D%225%22%3E%3Ccircle%20cx%3D%22196%22%20cy%3D%22269%22%20r%3D%2239%22%2F%3E%3Ccircle%20cx%3D%22444%22%20cy%3D%22269%22%20r%3D%2239%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23aab8c7%22%20stroke%3D%22%233c4c60%22%20stroke-width%3D%226%22%3E%3Ccircle%20cx%3D%22196%22%20cy%3D%22269%22%20r%3D%2223%22%2F%3E%3Ccircle%20cx%3D%22444%22%20cy%3D%22269%22%20r%3D%2223%22%2F%3E%3C%2Fg%3E%3Ctext%20x%3D%22320%22%20y%3D%22354%22%20text-anchor%3D%22middle%22%20fill%3D%22%23536477%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%3ESTUDENT%20CONCEPT%20ILLUSTRATION%3C%2Ftext%3E%3C%2Fsvg%3E" alt="X7 Grand Journey" class="w-full h-auto rounded-lg">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <span class="text-bmw-accent font-tech text-xs tracking-wider uppercase font-semibold">More Room For The Journey</span>
+                            <h3 class="text-xl font-bold font-tech text-white">BMW X7 Grand Journey</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">For the family that turns a quick getaway into a full itinerary. A travel-focused concept designed around shared adventures and everyday comfort.</p>
+                            
+                            <ul class="text-xs text-slate-300 space-y-2 py-2 border-t border-slate-700/50">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Silver exterior concept</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Premium comfort theme</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bmw-lightBlue"></i> Family travel accessory bundle</li>
+                            </ul>
+
+                            <div class="mt-auto pt-4 border-t border-slate-700/60">
+                                <span class="text-2xl font-tech font-bold text-white">$89,500</span>
+                                <span class="block text-[11px] text-slate-400">Fictional classroom package price</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PROCESS SECTION -->
+            <section class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 sm:p-8 glow-effect space-y-6">
+                <div>
+                    <span class="text-bmw-accent font-tech text-xs tracking-wider uppercase font-semibold">The Imagined Customer Experience</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white mt-1">From Your First Choice to Your First Drive</h2>
+                    <p class="text-slate-400 text-sm">Our fictional three-step process makes the journey easy to follow.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-bmw-navy/80 p-5 rounded-xl border border-slate-700/50 space-y-3">
+                        <span class="text-3xl font-tech font-bold text-bmw-blue">01</span>
+                        <h3 class="text-base font-bold text-white font-tech">Choose Your Package</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">Compare our three concepts and select the style, color, and extras that fit your plans.</p>
+                    </div>
+                    <div class="bg-bmw-navy/80 p-5 rounded-xl border border-slate-700/50 space-y-3">
+                        <span class="text-3xl font-tech font-bold text-bmw-blue">02</span>
+                        <h3 class="text-base font-bold text-white font-tech">Follow the Build</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">Imagine tracking your order as it moves through assembly, inspection, and final preparation at Spartanburg.</p>
+                    </div>
+                    <div class="bg-bmw-navy/80 p-5 rounded-xl border border-slate-700/50 space-y-3">
+                        <span class="text-3xl font-tech font-bold text-bmw-blue">03</span>
+                        <h3 class="text-base font-bold text-white font-tech">Start Your Journey</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">In our scenario, your local dealership arranges pickup and walks you through your selected package.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROMO SECTION -->
+            <section class="bg-gradient-to-r from-blue-900/60 via-bmw-card to-bmw-dark rounded-xl border border-bmw-blue/50 p-6 sm:p-8 glow-effect">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-8 space-y-4">
+                        <span class="bg-bmw-blue/30 text-bmw-accent text-xs font-semibold px-2.5 py-1 rounded border border-bmw-blue/40 uppercase tracking-wider">Featured Classroom Offer</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold font-tech text-white leading-tight">Your Next Chapter.<br><span class="text-bmw-lightBlue">A Little More Adventure.</span></h2>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Choose the X5 Everyday Escape package and receive a fictional $1,000 credit toward the included weekend accessory bundle.</p>
+                        <div class="pt-2">
+                            <button onclick="navigatePage('page3')" class="inline-flex items-center gap-2 bg-bmw-blue hover:bg-blue-600 text-white font-semibold text-xs px-5 py-3 rounded-lg shadow transition-all">
+                                Ask our team about the offer <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 bg-bmw-navy/90 p-6 rounded-xl border border-bmw-blue/40 text-center space-y-2">
+                        <span class="text-[11px] text-slate-400 block tracking-wider uppercase font-semibold">Mention This Fictional Promo Code</span>
+                        <strong class="text-2xl font-tech font-black text-bmw-accent tracking-widest block py-1">SPARTAN1000</strong>
+                        <span class="text-[11px] text-slate-400 block">$1,000 accessory credit / X5 package only</span>
+                    </div>
+                </div>
+
+                <p class="text-[10px] text-slate-500 mt-6 border-t border-slate-800 pt-4">Made-up classroom promotion. No cash value, real purchase, or redemption. Not sponsored, approved, or offered by BMW.</p>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ================= PAGE 3 VIEW (PAGE3.HTML) ================= -->
+    <div id="page3" class="page-view">
+        <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+            <!-- HERO SECTION -->
+            <section class="relative rounded-2xl bg-gradient-to-br from-bmw-dark via-bmw-card to-bmw-navy p-6 sm:p-10 border border-bmw-blue/30 glow-effect overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="inline-flex items-center space-x-2 bg-bmw-blue/20 border border-bmw-blue/40 px-3 py-1 rounded-full text-bmw-accent text-xs font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-users"></i>
+                            <span>About Us &amp; Contact</span>
+                        </div>
+
+                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white font-tech leading-tight">
+                            Driven by people.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-bmw-lightBlue to-blue-400">Built through teamwork.</span>
+                        </h1>
+
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Explore the people, technology, and business decisions behind our student project on BMW Manufacturing in Spartanburg, South Carolina.
+                        </p>
+
+                        <div class="pt-2">
+                            <a href="#contact" class="inline-flex items-center gap-2 bg-bmw-blue hover:bg-blue-600 text-white font-semibold text-xs px-5 py-3 rounded-lg shadow transition-all">
+                                Connect with our team <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221000%22%20height%3D%22460%22%20viewBox%3D%220%200%201000%20460%22%3E%3Crect%20width%3D%221000%22%20height%3D%22460%22%20fill%3D%22%23e7eff8%22%2F%3E%3Ccircle%20cx%3D%22825%22%20cy%3D%2295%22%20r%3D%2248%22%20fill%3D%22%23bad7f5%22%2F%3E%3Cpath%20d%3D%22M0%20350L180%20280%20360%20320%20620%20250%201000%20320V460H0Z%22%20fill%3D%22%23cbdbea%22%2F%3E%3Cpath%20d%3D%22M80%20330V190L210%20145V190L340%20145V190H610V330Z%22%20fill%3D%22%23173758%22%2F%3E%3Cg%20fill%3D%22%239dcdf2%22%3E%3Cpath%20d%3D%22M110%20220H190V260H110ZM220%20220H300V260H220ZM330%20220H410V260H330ZM440%20220H520V260H440Z%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M550%20170V80H585V170%22%20fill%3D%22%23173758%22%2F%3E%3Cpath%20d%3D%22M0%20375H1000%22%20stroke%3D%22%239cacbf%22%20stroke-width%3D%226%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M550%20340L580%20296Q585%20286%20605%20286H730Q747%20286%20760%20302L793%20340L850%20350V385H520V355Z%22%20fill%3D%22%231769bd%22%2F%3E%3Cpath%20d%3D%22M610%20299H660V336H587ZM674%20299H725L756%20336H674Z%22%20fill%3D%22%23e6f5ff%22%2F%3E%3Ccircle%20cx%3D%22585%22%20cy%3D%22383%22%20r%3D%2229%22%20fill%3D%22%23142638%22%2F%3E%3Ccircle%20cx%3D%22585%22%20cy%3D%22383%22%20r%3D%2213%22%20fill%3D%22%23c1ccda%22%2F%3E%3Ccircle%20cx%3D%22783%22%20cy%3D%22383%22%20r%3D%2229%22%20fill%3D%22%23142638%22%2F%3E%3Ccircle%20cx%3D%22783%22%20cy%3D%22383%22%20r%3D%2213%22%20fill%3D%22%23c1ccda%22%2F%3E%3C%2Fsvg%3E" alt="Manufacturing Plant Illustration" class="rounded-xl border border-slate-700/60 shadow-lg w-full h-auto">
+                    </div>
+                </div>
+            </section>
+
+            <!-- OUR STORY PANEL -->
+            <section class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 sm:p-8 glow-effect space-y-4">
+                <span class="text-bmw-accent font-tech text-xs tracking-wider uppercase font-semibold">Our Story</span>
+                <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white">One Plant. Three Perspectives. A Shared Goal.</h2>
+                <div class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-4xl">
+                    <p>BMW Manufacturing's Spartanburg facility brings together people, technology, and production processes to build vehicles for customers in the United States and around the world. Its work connects manufacturing quality with efficient operations and coordinated business decisions.</p>
+                    <p>Our group chose this business to explore a question: what does it take to keep a vehicle manufacturing plant running smoothly? We approached it through three connected careers: IT support, operations management, and financial analysis.</p>
+                    <p>As a student team, our goal is to show how reliable technology, organized production, and informed financial planning work together to support a successful business.</p>
+                </div>
+                <p class="text-[11px] text-slate-400 italic pt-2 border-t border-slate-800">This is an educational website created by students. The team below represents our assigned project roles, not BMW employees or founders.</p>
+            </section>
+
+            <!-- PROJECT TEAM CARDS -->
+            <section class="space-y-6">
+                <div>
+                    <span class="text-bmw-accent font-tech text-xs tracking-wider uppercase font-semibold">Meet The Project Team</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-tech text-white mt-1">The People Behind Our Project</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Member 1 -->
+                    <div class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 glow-effect space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-lg bg-blue-600/20 text-bmw-blue border border-bmw-blue/40 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold font-tech text-white">Malaya Coley-Sturgis</h3>
+                                <p class="text-xs text-bmw-accent font-semibold">IT Support Specialist</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">Malaya's project role focuses on troubleshooting technical problems, supporting employees, and keeping devices and systems working reliably. Her role shows how dependable technology supports communication and daily production.</p>
+                    </div>
+
+                    <!-- Member 2 -->
+                    <div class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 glow-effect space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-600/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-gears"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold font-tech text-white">Abby Oehlmann</h3>
+                                <p class="text-xs text-emerald-400 font-semibold">Operations Manager</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">Abby's project role focuses on coordinating people, production schedules, and resources. Her role connects departments, identifies opportunities to improve efficiency, and keeps production goals and quality standards in focus.</p>
+                    </div>
+
+                    <!-- Member 3 -->
+                    <div class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 glow-effect space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-lg bg-purple-600/20 text-purple-400 border border-purple-500/40 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold font-tech text-white">Jacob Seigler</h3>
+                                <p class="text-xs text-purple-300 font-semibold">Financial Analyst</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">Jacob's project role focuses on tracking budgets, reviewing operating costs, and analyzing financial performance. His role shows how financial information helps management plan resources and make informed decisions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TEAMWORK COLLABORATION PANEL -->
+            <section class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 sm:p-8 glow-effect space-y-3">
+                <h2 class="text-xl sm:text-2xl font-bold font-tech text-white flex items-center gap-2">
+                    <i class="fa-solid fa-handshake-angle text-bmw-lightBlue"></i>
+                    How Our Roles Work Together
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    If a production system experiences a technical problem, IT support helps restore access. Operations management coordinates the production response and adjusts schedules as needed. Financial analysis examines how the interruption affects costs and budgets. Together, these roles help the business solve problems and meet its goals.
+                </p>
+            </section>
+
+            <!-- CONTACT & HOURS SECTION -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="contact">
+                <!-- Contact Box -->
+                <section class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 glow-effect space-y-4">
+                    <h2 class="text-xl font-bold font-tech text-white flex items-center gap-2">
+                        <i class="fa-solid fa-envelope text-bmw-blue"></i>
+                        Contact Our Project Team
+                    </h2>
+                    <p class="text-[11px] text-slate-400">All contact details below are fictional and provided for this assignment only.</p>
+
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <span class="text-slate-400 font-semibold block">Email</span>
+                            <span class="text-white font-mono">spartanburgteam@example.com</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 font-semibold block">Phone</span>
+                            <span class="text-white font-mono">(864) 555-0147</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 font-semibold block">Mock Office Location</span>
+                            <span class="text-white">Student Business Center, Room 203<br>Spartanburg, South Carolina</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 font-semibold block">Mock Social Media Handle</span>
+                            <span class="text-bmw-accent font-mono">@SpartanburgStudentTeam</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Hours Box -->
+                <section class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 glow-effect space-y-4">
+                    <h2 class="text-xl font-bold font-tech text-white flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-bmw-lightBlue"></i>
+                        Hours of Operation
+                    </h2>
+                    <p class="text-[11px] text-slate-400">Fictional project office hours</p>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <tbody class="divide-y divide-slate-800 text-slate-300">
+                                <tr>
+                                    <th scope="row" class="py-3 font-semibold text-white">Monday - Friday</th>
+                                    <td class="py-3 font-mono text-right">9:00 a.m. - 5:00 p.m.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="py-3 font-semibold text-white">Saturday</th>
+                                    <td class="py-3 font-mono text-right">10:00 a.m. - 2:00 p.m.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="py-3 font-semibold text-white">Sunday</th>
+                                    <td class="py-3 font-mono text-right text-red-400">Closed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="text-[11px] text-slate-500 pt-2 border-t border-slate-800">These are pretend office hours for our student business website, not actual plant operating hours.</p>
+                </section>
+            </div>
+
+            <!-- FAQ ACCORDION SECTION -->
+            <section class="bg-bmw-card rounded-xl border border-slate-700/60 p-6 sm:p-8 glow-effect space-y-4">
+                <h2 class="text-xl sm:text-2xl font-bold font-tech text-white flex items-center gap-2">
+                    <i class="fa-solid fa-circle-question text-bmw-accent"></i>
+                    Frequently Asked Questions
+                </h2>
+
+                <div class="space-y-3 text-xs sm:text-sm">
+                    <details class="group bg-bmw-navy/60 rounded-lg border border-slate-800 p-4 transition-all">
+                        <summary class="cursor-pointer font-bold text-white flex items-center justify-between">
+                            <span>Can I buy a vehicle through this website?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <p class="text-slate-300 text-xs mt-3 pt-3 border-t border-slate-800">This website is a class project and does not accept orders. You can explore our group's vehicle offerings on the Products &amp; Services page.</p>
+                    </details>
+
+                    <details class="group bg-bmw-navy/60 rounded-lg border border-slate-800 p-4 transition-all">
+                        <summary class="cursor-pointer font-bold text-white flex items-center justify-between">
+                            <span>Why did our group choose manufacturing?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <p class="text-slate-300 text-xs mt-3 pt-3 border-t border-slate-800">Manufacturing connects technology, operations, and finance. It lets each group member explore a different career while showing how those roles depend on one another.</p>
+                    </details>
+
+                    <details class="group bg-bmw-navy/60 rounded-lg border border-slate-800 p-4 transition-all">
+                        <summary class="cursor-pointer font-bold text-white flex items-center justify-between">
+                            <span>Who should I contact about a technical problem?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <p class="text-slate-300 text-xs mt-3 pt-3 border-t border-slate-800">In our project scenario, Malaya handles IT support. Abby considers the effect on production, and Jacob evaluates any related costs.</p>
+                    </details>
+
+                    <details class="group bg-bmw-navy/60 rounded-lg border border-slate-800 p-4 transition-all">
+                        <summary class="cursor-pointer font-bold text-white flex items-center justify-between">
+                            <span>Does the team build cars during class?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <p class="text-slate-300 text-xs mt-3 pt-3 border-t border-slate-800">Only in our business plans! Our actual tools are research, teamwork, HTML, and CSS.</p>
+                    </details>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- SHARED FOOTER -->
+    <footer class="bg-bmw-navy border-t border-bmw-blue/20 py-8 mt-16 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-bmw-blue flex items-center justify-center text-white font-tech font-black text-[10px]">BMW</div>
+                <div>
+                    <p class="text-slate-200 font-medium">BMW Manufacturing Co., LLC – Plant Spartanburg</p>
+                    <p class="text-[11px] text-slate-500">Spartanburg, South Carolina • Production ERP Database System</p>
+                </div>
+            </div>
+
+            <div class="text-center sm:text-right text-slate-400">
+                <p>Designed by Malaya Coley-Sturgis • Abby Oehlmann • Jacob Seigler</p>
+                <p class="text-[10px] text-slate-500 mt-0.5">© BMW Group Production Management System. Internal Academic Case Study.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPT LOGIC -->
+    <script>
+        // --- MULTI-PAGE NAVIGATION ROUTER ---
+        function navigatePage(pageId) {
+            document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            // Update active state on nav buttons
+            ['page1', 'page2', 'page3'].forEach(id => {
+                const btn = document.getElementById(`nav-${id}`);
+                if (btn) {
+                    if (id === pageId) {
+                        btn.className = "nav-btn text-bmw-lightBlue border-b-2 border-bmw-blue font-semibold py-1 transition-colors";
+                    } else {
+                        btn.className = "nav-btn text-slate-300 hover:text-bmw-lightBlue py-1 transition-colors";
+                    }
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- MOBILE MENU TOGGLE ---
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- ROLE TAB SWITCHING LOGIC (PAGE 1) ---
+        function switchRoleTab(role) {
+            const tabs = ['supervisor', 'technician', 'manager'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`btn-${t}`);
+                const panel = document.getElementById(`role-panel-${t}`);
+                if (t === role) {
+                    btn.className = "role-tab-btn active px-3 py-1.5 rounded-md font-medium transition-all bg-bmw-blue text-white shadow";
+                    panel.classList.remove('hidden');
+                } else {
+                    btn.className = "role-tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white transition-all";
+                    panel.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- DATABASE SCHEMAS & LIVE DATA STORAGE (PAGE 1) ---
+        const dbData = {
+            order: {
+                title: "ProductionOrder",
+                schema: [
+                    { name: "ProductionOrderID", type: "Integer", key: "PK", desc: "Unique identifier for each production order" },
+                    { name: "VehicleModel", type: "Text", key: "-", desc: "BMW model (e.g., BMW X3, X5, X6, X7, XM)" },
+                    { name: "ScheduledDate", type: "Date", key: "-", desc: "Planned completion/assembly date" },
+                    
+                    ]
+            }
+        };
