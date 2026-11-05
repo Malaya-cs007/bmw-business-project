@@ -91,11 +91,20 @@
                 </button>
 
                 <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex space-x-6 text-sm font-medium">
-                    <button onclick="navigatePage('page1')" id="nav-page1" class="nav-btn text-bmw-lightBlue border-b-2 border-bmw-blue font-semibold py-1 transition-colors">Home (ERP Overview)</button>
-                    <button onclick="navigatePage('page2')" id="nav-page2" class="nav-btn text-slate-300 hover:text-bmw-lightBlue py-1 transition-colors">Products &amp; Services</button>
-                    <button onclick="navigatePage('page3')" id="nav-page3" class="nav-btn text-slate-300 hover:text-bmw-lightBlue py-1 transition-colors">About Us &amp; Contact</button>
-                </nav>
+               <nav class="hidden md:flex space-x-6 text-sm font-medium">
+  <a href="index.html" aria-current="page"
+     class="text-bmw-lightBlue border-b-2 border-bmw-blue font-semibold py-1">
+    Home (ERP Overview)
+  </a>
+  <a href="page2.html"
+     class="text-slate-300 hover:text-bmw-lightBlue py-1 transition-colors">
+    Products &amp; Services
+  </a>
+  <a href="page3.html"
+     class="text-slate-300 hover:text-bmw-lightBlue py-1 transition-colors">
+    About Us &amp; Contact
+  </a>
+</nav>
 
                 <!-- Mobile Menu Toggle Button -->
                 <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2">
